@@ -7,11 +7,12 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Calculator {
+    private final ExpressionParser expressionParser = new ExpressionParser();
 
     public BigDecimal calculate(String input) throws ParseException {
         Stack<BigDecimal> stack = new Stack<>();
         try {
-            for (Operator operator : new ExpressionParser().parse(input)) {
+            for (Operator operator : expressionParser.parse(input)) {
                 stack.push(operator.apply(stack));
             }
         } catch (EmptyStackException ex) {
